@@ -1,0 +1,100 @@
+{{> header}}
+<section class="auth-section">
+    <div class="container auth-container">
+        <div class="auth-form-wrapper">
+            <h2>Вхід до аккаунта</h2>
+            <form action="/auth/login" method="POST" class="auth-form">
+                <div class="form-group">
+                    <label for="loginEmail">Email</label>
+                    <input type="email" id="loginEmail" name="loginEmail" value="{{loginEmail}}" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Пароль</label>
+                    <input type="password" id="password" name="password" required>
+                    {{#if error}}
+                    <div style="color: #e74c3c; font-size: 14px; margin-top: 8px;">{{error}}</div>
+                    {{/if}}
+                </div>
+                <button type="submit" class="btn btn-primary">Увійти</button>
+                <div class="auth-links">
+                    <span>Немає акаунту? <a href="/auth/register">Зареєструватись</a></span>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+{{> footer}}
+
+<style>
+    .auth-section {
+        padding: 80px 0;
+        flex-grow: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .auth-form-wrapper {
+        background: var(--card-bg);
+        padding: 40px;
+        border-radius: 15px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+        width: 100%;
+        max-width: 450px;
+    }
+
+    .auth-form-wrapper h2 {
+        color: var(--primary-dark);
+        margin-bottom: 30px;
+        text-align: center;
+    }
+
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+    .form-group label {
+        display: block;
+        margin-bottom: 8px;
+        color: var(--text-color);
+        font-weight: 500;
+    }
+
+    .form-group input {
+        width: 100%;
+        padding: 12px 15px;
+        border: 1px solid var(--border-color);
+        border-radius: 8px;
+        font-family: inherit;
+        font-size: 16px;
+        transition: var(--transition);
+    }
+
+    .form-group input:focus {
+        outline: none;
+        border-color: var(--primary-color);
+        box-shadow: 0 0 0 3px rgba(209, 163, 164, 0.2);
+    }
+
+    .auth-form .btn {
+        width: 100%;
+        margin-top: 10px;
+    }
+
+    .auth-links {
+        margin-top: 20px;
+        text-align: center;
+        font-size: 14px;
+        color: var(--text-light);
+    }
+
+    .auth-links a {
+        color: var(--primary-color);
+        text-decoration: none;
+        font-weight: 600;
+    }
+
+    .auth-links a:hover {
+        text-decoration: underline;
+    }
+</style>

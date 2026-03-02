@@ -1,0 +1,417 @@
+{{> header}}
+
+<section class="profile-section">
+    <div class="container profile-layout">
+        <aside class="profile-sidebar">
+            <div class="user-info-card">
+                <div class="avatar-placeholder">
+                    {{#if profileUser.firstName}}
+                    {{profileUser.firstName.[0]}}
+                    {{else}}
+                    U
+                    {{/if}}
+                </div>
+                <h3>{{profileUser.firstName}} {{profileUser.lastName}}</h3>
+                <p class="user-email">{{profileUser.loginEmail}}</p>
+
+                <ul class="profile-menu">
+                    <li><button class="tab-link active" onclick="openTab(event, 'personal-data')">Особисті дані</button>
+                    </li>
+                    <li><button class="tab-link" onclick="openTab(event, 'cart-data')">Мій кошик</button></li>
+                    <li><button class="tab-link" onclick="openTab(event, 'orders-data')">Історія покупок</button></li>
+                    <li><a href="/auth/logout" class="text-danger profile-logout-link">Вийти з акаунту</a></li>
+                </ul>
+            </div>
+        </aside>
+
+        <div class="profile-main">
+            <div id="personal-data" class="tab-content default-tab">
+                <h2>Особисті дані</h2>
+                <div class="info-container">
+                    <div class="info-group">
+                        <span class="info-label">Ім'я:</span>
+                        <span class="info-value">{{profileUser.firstName}}</span>
+                    </div>
+                    <div class="info-group">
+                        <span class="info-label">Прізвище:</span>
+                        <span class="info-value">{{profileUser.lastName}}</span>
+                    </div>
+                    <div class="info-group">
+                        <span class="info-label">Email:</span>
+                        <span class="info-value">{{profileUser.loginEmail}}</span>
+                    </div>
+                    <div class="info-group">
+                        <span class="info-label">Дата реєстрації:</span>
+                        <span class="info-value">Нещодавно</span>
+                    </div>
+                </div>
+            </div>
+
+            <div id="cart-data" class="tab-content" style="display:none;">
+                <h2>Мій кошик</h2>
+                <div class="cart-container">
+                    {{#if cart}}
+                    {{#if cart.cartItems.length}}
+                    <div class="cart-items-list">
+                        {{#each cart.cartItems}}
+                        <div class="cart-item">
+                            <div class="cart-item-image">
+                                <img src="https://images.unsplash.com/photo-1596462502278-27bfdb403348?auto=format&fit=crop&q=80&w=150"
+                                    alt="{{this.idProduct.name}}">
+                            </div>
+                            <div class="cart-item-details">
+                                <h4>{{this.idProduct.name}}</h4>
+                                <p class="brand">Бренд: {{this.idProduct.brand}}</p>
+                                <div class="cart-item-actions">
+                                    <div class="quantity-controls">
+                                        <button class="btn-qty">-</button>
+                                        <input type="number" value="{{this.quantity}}" min="1" readonly>
+                                        <button class="btn-qty">+</button>
+                                    </div>
+                                    <p class="item-price">{{this.idProduct.price}} ₴</p>
+                                </div>
+                            </div>
+                        </div>
+                        {{/each}}
+                    </div>
+                    {{else}}
+                    <div class="empty-cart">
+                        <img src="https://cdn-icons-png.flaticon.com/512/11329/11329060.png" alt="Empty Cart">
+                        <p>Ваш кошик наразі порожній</p>
+                        <a href="/products" class="btn btn-primary">Перейти до каталогу</a>
+                    </div>
+                    {{/if}}
+                    {{else}}
+                    <div class="empty-cart">
+                        <p>Кошик ще не створено</p>
+                    </div>
+                    {{/if}}
+                </div>
+
+                {{#if cartTotal}}
+                <div class="cart-summary">
+                    <div class="summary-row">
+                        <span>Разом до сплати:</span>
+                        <span class="total-price">{{cartTotal}} ₴</span>
+                    </div>
+                    <button class="btn btn-primary btn-full">Оформити замовлення</button>
+                </div>
+                {{/if}}
+            </div>
+
+            <div id="orders-data" class="tab-content" style="display:none;">
+                <h2>Історія покупок</h2>
+                {{#if orders.length}}
+                <div class="orders-list">
+                    {{#each orders}}
+                    <div class="order-card">
+                        <div class="order-header">
+                            <span class="order-id">Замовлення #{{this.idOrder}}</span>
+                            <span class="order-status badge {{this.status}}">{{this.status}}</span>
+                        </div>
+                        <div class="order-body">
+                            <p><strong>Дата:</strong> {{this.orderDate}}</p>
+                            <p><strong>Сума:</strong> <span class="text-primary">{{this.totalAmount}} ₴</span></p>
+                            <p><strong>Адреса доставки:</strong> {{this.deliveryAddress}}</p>
+                        </div>
+                    </div>
+                    {{/each}}
+                </div>
+                {{else}}
+                <div class="empty-cart">
+                    <p>Ви ще не робили замовлень</p>
+                    <a href="/products" class="btn btn-primary">Почати покупки</a>
+                </div>
+                {{/if}}
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<script>
+    function openTab(evt, tabId) {
+        var i, tabcontent, tablinks;
+        tabcontent = document.getElementsByClassName("tab-content");
+        for (i = 0; i < tabcontent.length; i++) {
+            tabcontent[i].style.display = "none";
+        }
+        tablinks = document.getElementsByClassName("tab-link");
+        for (i = 0; i < tablinks.length; i++) {
+            tablinks[i].className = tablinks[i].className.replace(" active", "");
+        }
+        document.getElementById(tabId).style.display = "block";
+        evt.currentTarget.className += " active";
+    }
+</script>
+
+{{> footer}}
+
+<style>
+    .profile-section {
+        padding: 60px 0;
+        background-color: var(--bg-color);
+        min-height: 80vh;
+    }
+
+    .profile-layout {
+        display: flex;
+        gap: 40px;
+        align-items: flex-start;
+    }
+
+    .profile-sidebar {
+        width: 320px;
+        flex-shrink: 0;
+    }
+
+    .user-info-card {
+        background: var(--card-bg);
+        border-radius: 12px;
+        padding: 30px;
+        text-align: center;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+    }
+
+    .avatar-placeholder {
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        background: var(--primary-color);
+        color: white;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 32px;
+        font-weight: 600;
+        margin-bottom: 15px;
+    }
+
+    .user-info-card h3 {
+        margin-bottom: 5px;
+        color: var(--primary-dark);
+    }
+
+    .user-email {
+        color: var(--text-light);
+        text-decoration: none;
+        font-size: 14px;
+        margin-bottom: 25px;
+    }
+
+    .profile-menu {
+        list-style: none;
+        padding: 0;
+        text-align: left;
+        border-top: 1px solid var(--border-color);
+        padding-top: 15px;
+    }
+
+    .profile-menu li {
+        margin-bottom: 10px;
+    }
+
+    .profile-menu a {
+        color: var(--text-color);
+        text-decoration: none;
+        display: block;
+        padding: 10px 15px;
+        border-radius: 8px;
+        transition: var(--transition);
+    }
+
+    .profile-menu a:hover,
+    .profile-menu a.active {
+        background: rgba(209, 163, 164, 0.1);
+        color: var(--primary-color);
+        font-weight: 500;
+    }
+
+    .profile-menu a.text-danger {
+        color: #e74c3c;
+    }
+
+    .profile-menu a.text-danger:hover {
+        background: rgba(231, 76, 60, 0.1);
+    }
+
+    .profile-main {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .profile-main h2 {
+        color: var(--primary-dark);
+        margin-bottom: 10px;
+    }
+
+    .cart-container {
+        background: var(--card-bg);
+        border-radius: 12px;
+        padding: 30px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+    }
+
+    .cart-items-list {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .cart-item {
+        display: flex;
+        gap: 20px;
+        padding-bottom: 20px;
+        border-bottom: 1px solid var(--border-color);
+    }
+
+    .cart-item:last-child {
+        border-bottom: none;
+        padding-bottom: 0;
+    }
+
+    .cart-item-image img {
+        width: 100px;
+        height: 100px;
+        object-fit: cover;
+        border-radius: 8px;
+    }
+
+    .cart-item-details {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+    .cart-item-details h4 {
+        color: var(--text-color);
+        margin-bottom: 5px;
+    }
+
+    .brand {
+        font-size: 13px;
+        color: var(--text-light);
+    }
+
+    .cart-item-actions {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: auto;
+    }
+
+    .quantity-controls {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        border: 1px solid var(--border-color);
+        border-radius: 6px;
+        padding: 4px;
+    }
+
+    .btn-qty {
+        border: none;
+        background: transparent;
+        cursor: pointer;
+        padding: 0 10px;
+        font-size: 18px;
+        color: var(--text-color);
+        transition: var(--transition);
+    }
+
+    .btn-qty:hover {
+        color: var(--primary-color);
+    }
+
+    .quantity-controls input {
+        width: 40px;
+        text-align: center;
+        border: none;
+        font-family: inherit;
+        font-size: 16px;
+        outline: none;
+    }
+
+    .item-price {
+        font-weight: 600;
+        color: var(--primary-dark);
+        font-size: 18px;
+    }
+
+    .cart-summary {
+        background: var(--card-bg);
+        border-radius: 12px;
+        padding: 30px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+        align-self: flex-end;
+        width: 100%;
+        max-width: 400px;
+    }
+
+    .summary-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+        font-size: 18px;
+        font-weight: 500;
+    }
+
+    .total-price {
+        font-size: 24px;
+        color: var(--primary-color);
+        font-weight: 600;
+    }
+
+    .btn-full {
+        width: 100%;
+        display: block;
+        text-align: center;
+    }
+
+    .empty-cart {
+        text-align: center;
+        padding: 40px 20px;
+    }
+
+    .empty-cart img {
+        width: 120px;
+        opacity: 0.5;
+        margin-bottom: 20px;
+        filter: grayscale(1);
+    }
+
+    .empty-cart p {
+        color: var(--text-light);
+        margin-bottom: 25px;
+        font-size: 18px;
+    }
+
+    @media(max-width: 900px) {
+        .profile-layout {
+            flex-direction: column;
+        }
+
+        .profile-sidebar {
+            width: 100%;
+        }
+
+        .cart-summary {
+            max-width: 100%;
+        }
+    }
+
+    @media(max-width: 600px) {
+        .cart-item {
+            flex-direction: column;
+        }
+
+        .cart-item-image img {
+            width: 100%;
+            height: 200px;
+        }
+    }
+</style>

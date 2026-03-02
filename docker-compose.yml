@@ -1,0 +1,44 @@
+version: '3.8'
+
+services:
+  app:
+    build: .
+    ports:
+      - '3000:3000'
+    environment:
+      - DB_HOST=postgres
+      - DB_PORT=5432
+      - DB_USERNAME=postgres
+      - DB_PASSWORD=passwordvi
+      - DB_DATABASE=veronikaburkova
+      - PORT=3000
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - nestjs-network
+
+  postgres:
+    image: postgres:15-alpine
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=passwordvi
+      - POSTGRES_DB=veronikaburkova
+    ports:
+      - '5432:5432'
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d veronikaburkova"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - nestjs-network
+
+volumes:
+  pgdata:
+
+networks:
+  nestjs-network:
+    driver: bridge

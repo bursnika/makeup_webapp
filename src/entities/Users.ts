@@ -24,6 +24,9 @@ export class Users {
   })
   loginEmail: string;
 
+  @Column("character varying", { name: "password", length: 255, nullable: true })
+  password?: string;
+
   @Column("character varying", { name: "first_name", length: 50 })
   firstName: string;
 

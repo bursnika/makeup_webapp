@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="uk">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{title}}</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <header class="navbar">
+        <div class="container">
+            <a href="/" class="logo">Bloom</a>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="/">Головна</a></li>
+                    <li><a href="/products">Каталог</a></li>
+                    {{#if user}}
+                    <li>
+                        <a href="/profile" class="profile-icon-link">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path>
+                                <circle cx="12" cy="7" r="4"></circle>
+                            </svg>
+                            <span>{{user.firstName}}</span>
+                        </a>
+                    </li>
+                    {{else}}
+                    <li><a href="/auth/login">Увійти</a></li>
+                    <li><a href="/auth/register" class="btn btn-primary"
+                            style="padding: 6px 15px; font-size: 14px; margin-top: -5px; color: white !important;">Реєстрація</a>
+                    </li>
+                    {{/if}}
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <main>

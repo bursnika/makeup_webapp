@@ -1,0 +1,72 @@
+{{> header}}
+<section class="page-header">
+    <div class="container">
+        <h1>Наш каталог</h1>
+        <p>Обирайте найкращі продукти для догляду та макіяжу</p>
+    </div>
+</section>
+
+<section class="products">
+    <div class="container products-layout">
+        <aside class="filters-sidebar">
+            <h3>Фільтри</h3>
+            <form action="/products" method="GET" class="filter-form">
+                <div class="filter-group">
+                    <label for="search">Пошук за назвою</label>
+                    <input type="text" id="search" name="search" value="{{currentQuery.search}}" placeholder="Пошук...">
+                </div>
+                <div class="filter-group">
+                    <label for="category">Категорія</label>
+                    <select id="category" name="category">
+                        <option value="">Усі</option>
+                        <option value="Догляд" {{#if (eq currentQuery.category 'Догляд' )}}selected{{/if}}>Догляд
+                        </option>
+                        <option value="Макіяж" {{#if (eq currentQuery.category 'Макіяж' )}}selected{{/if}}>Макіяж
+                        </option>
+                        <option value="Аксесуари" {{#if (eq currentQuery.category 'Аксесуари' )}}selected{{/if}}>
+                            Аксесуари</option>
+                    </select>
+                </div>
+                <div class="filter-group price-range">
+                    <label>Ціна (₴)</label>
+                    <div class="price-inputs">
+                        <input type="number" name="minPrice" placeholder="Від" value="{{currentQuery.minPrice}}">
+                        <span>-</span>
+                        <input type="number" name="maxPrice" placeholder="До" value="{{currentQuery.maxPrice}}">
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary btn-full">Застосувати</button>
+                <a href="/products" class="btn btn-outline btn-full reset-filters">Скинути</a>
+            </form>
+        </aside>
+
+        <div class="products-main">
+            {{#if products.length}}
+            <div class="products-grid">
+                {{#each products}}
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1596462502278-27bfdb403348?auto=format&fit=crop&q=80&w=600"
+                            alt="{{this.name}}">
+                    </div>
+                    <div class="product-info">
+                        <span class="product-category">{{#if
+                            this.category}}{{this.category}}{{else}}Догляд{{/if}}</span>
+                        <h3 class="product-title">{{this.name}}</h3>
+                        <span class="product-brand">{{#if this.brand}}Бренд: {{this.brand}}{{/if}}</span>
+                        <div class="product-bottom">
+                            <span class="product-price">{{this.price}} ₴</span>
+                            <button class="btn btn-outline">В кошик</button>
+                        </div>
+                    </div>
+                </div>
+                {{/each}}
+            </div>
+            {{else}}
+            <div class="empty-state">
+                <p>Наразі товарів немає, але ми скоро додамо щось цікаве!</p>
+            </div>
+            {{/if}}
+        </div>
+</section>
+{{> footer}}

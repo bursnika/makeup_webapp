@@ -19,7 +19,7 @@ export class Products {
   name: string;
 
   @Column("numeric", { name: "price", precision: 15, scale: 2 })
-  price: string;
+  price: number;
 
   @Column("character varying", { name: "brand", nullable: true, length: 100 })
   brand: string | null;
