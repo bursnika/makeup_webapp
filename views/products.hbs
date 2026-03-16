@@ -19,9 +19,11 @@
                     <label for="category">Категорія</label>
                     <select id="category" name="category">
                         <option value="">Усі</option>
-                        <option value="Догляд" {{#if (eq currentQuery.category 'Догляд' )}}selected{{/if}}>Догляд
+                        <option value="Обличчя" {{#if (eq currentQuery.category 'Обличчя' )}}selected{{/if}}>Обличчя
                         </option>
-                        <option value="Макіяж" {{#if (eq currentQuery.category 'Макіяж' )}}selected{{/if}}>Макіяж
+                        <option value="Очі" {{#if (eq currentQuery.category 'Очі' )}}selected{{/if}}>Очі</option>
+                        <option value="Губи" {{#if (eq currentQuery.category 'Губи' )}}selected{{/if}}>Губи</option>
+                        <option value="Догляд" {{#if (eq currentQuery.category 'Догляд' )}}selected{{/if}}>Догляд
                         </option>
                         <option value="Аксесуари" {{#if (eq currentQuery.category 'Аксесуари' )}}selected{{/if}}>
                             Аксесуари</option>
@@ -46,7 +48,7 @@
                 {{#each products}}
                 <div class="product-card">
                     <div class="product-image">
-                        <img src="https://images.unsplash.com/photo-1596462502278-27bfdb403348?auto=format&fit=crop&q=80&w=600"
+                        <img src="{{#if this.imageUrl}}{{this.imageUrl}}{{else}}https://images.unsplash.com/photo-1596462502278-27bfdb403348?auto=format&fit=crop&q=80&w=600{{/if}}"
                             alt="{{this.name}}">
                     </div>
                     <div class="product-info">
@@ -56,7 +58,8 @@
                         <span class="product-brand">{{#if this.brand}}Бренд: {{this.brand}}{{/if}}</span>
                         <div class="product-bottom">
                             <span class="product-price">{{this.price}} ₴</span>
-                            <button class="btn btn-outline">В кошик</button>
+                            <button class="btn btn-outline add-to-cart-btn" data-product-id="{{this.idProduct}}">В
+                                кошик</button>
                         </div>
                     </div>
                 </div>
@@ -69,4 +72,40 @@
             {{/if}}
         </div>
 </section>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const addToCartButtons = document.querySelectorAll('.add-to-cart-btn');
+
+        addToCartButtons.forEach(button => {
+            button.addEventListener('click', async (e) => {
+                e.preventDefault();
+                const productId = button.getAttribute('data-product-id');
+
+                try {
+                    const response = await fetch(`/cart/add/${productId}`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        }
+                    });
+
+                    const result = await response.json();
+                    if (result.success) {
+                        alert('Товар успішно додано до кошика!');
+                    } else {
+                        alert(result.message || 'Потрібно увійти в систему щоб додати товар у кошик.');
+                        if (result.message === 'Please log in first') {
+                            window.location.href = '/auth/login';
+                        }
+                    }
+                } catch (error) {
+                    console.error('Error adding to cart:', error);
+                    alert('Виникла помилка. Спробуйте ще раз.');
+                }
+            });
+        });
+    });
+</script>
+
 {{> footer}}

@@ -36,4 +36,18 @@ export class ProductsService {
 
     return await qb.getMany();
   }
+
+  async getCategoryDistribution(): Promise<{ category: string; count: number }[]> {
+    const result = await this.productsRepository
+      .createQueryBuilder('product')
+      .select('product.category', 'category')
+      .addSelect('COUNT(product.id_product)', 'count')
+      .groupBy('product.category')
+      .getRawMany();
+
+    return result.map(item => ({
+      category: item.category || 'Uncategorized',
+      count: parseInt(item.count, 10)
+    }));
+  }
 }

@@ -1,0 +1,46 @@
+
+> makeup@0.0.1 start
+> nest start
+
+[32m[Nest] 7323  - [39m03/16/2026, 2:51:50 PM [32m    LOG[39m [38;5;3m[NestFactory] [39m[32mStarting Nest application...[39m
+[32m[Nest] 7323  - [39m03/16/2026, 2:51:50 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mTypeOrmModule dependencies initialized[39m[38;5;3m +30ms[39m
+[32m[Nest] 7323  - [39m03/16/2026, 2:51:50 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mPassportModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 7323  - [39m03/16/2026, 2:51:50 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mAppModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 7323  - [39m03/16/2026, 2:51:50 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mTypeOrmCoreModule dependencies initialized[39m[38;5;3m +50ms[39m
+[32m[Nest] 7323  - [39m03/16/2026, 2:51:50 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mTypeOrmModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 7323  - [39m03/16/2026, 2:51:50 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mTypeOrmModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 7323  - [39m03/16/2026, 2:51:50 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mTypeOrmModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 7323  - [39m03/16/2026, 2:51:50 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mProductsModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 7323  - [39m03/16/2026, 2:51:50 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mProfileModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 7323  - [39m03/16/2026, 2:51:50 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mAuthModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 7323  - [39m03/16/2026, 2:51:50 PM [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mAppController {/}:[39m[38;5;3m +2ms[39m
+[32m[Nest] 7323  - [39m03/16/2026, 2:51:50 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/, GET} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 7323  - [39m03/16/2026, 2:51:50 PM [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mProductsController {/products}:[39m[38;5;3m +0ms[39m
+[32m[Nest] 7323  - [39m03/16/2026, 2:51:50 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/products, POST} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 7323  - [39m03/16/2026, 2:51:50 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/products, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 7323  - [39m03/16/2026, 2:51:50 PM [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mAuthController {/auth}:[39m[38;5;3m +0ms[39m
+[32m[Nest] 7323  - [39m03/16/2026, 2:51:50 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/auth/login, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 7323  - [39m03/16/2026, 2:51:50 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/auth/login, POST} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 7323  - [39m03/16/2026, 2:51:50 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/auth/register, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 7323  - [39m03/16/2026, 2:51:50 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/auth/register, POST} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 7323  - [39m03/16/2026, 2:51:50 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/auth/logout, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 7323  - [39m03/16/2026, 2:51:50 PM [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mProfileController {/profile}:[39m[38;5;3m +0ms[39m
+[32m[Nest] 7323  - [39m03/16/2026, 2:51:50 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/profile, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 7323  - [39m03/16/2026, 2:51:50 PM [32m    LOG[39m [38;5;3m[NestApplication] [39m[32mNest application successfully started[39m[38;5;3m +1ms[39m
+[31m[Nest] 7323  - [39m03/16/2026, 2:51:52 PM [31m  ERROR[39m [38;5;3m[ExceptionsHandler] [39mError: Failed to lookup view "index" in views directory "/Users/veronikaburkova/makeup/dist/views"
+    at app.render [90m(/Users/veronikaburkova/makeup/[39mnode_modules/[4mexpress[24m/lib/application.js:562:17[90m)[39m
+    at ServerResponse.render [90m(/Users/veronikaburkova/makeup/[39mnode_modules/[4mexpress[24m/lib/response.js:923:7[90m)[39m
+    at ExpressAdapter.render [90m(/Users/veronikaburkova/makeup/[39mnode_modules/[4m@nestjs/platform-express[24m/adapters/express-adapter.js:89:25[90m)[39m
+    at RouterResponseController.render [90m(/Users/veronikaburkova/makeup/[39mnode_modules/[4m@nestjs/core[24m/router/router-response-controller.js:29:36[90m)[39m
+    at async [90m/Users/veronikaburkova/makeup/[39mnode_modules/[4m@nestjs/core[24m/router/router-execution-context.js:159:24
+    at async [90m/Users/veronikaburkova/makeup/[39mnode_modules/[4m@nestjs/core[24m/router/router-execution-context.js:47:13
+    at async [90m/Users/veronikaburkova/makeup/[39mnode_modules/[4m@nestjs/core[24m/router/router-proxy.js:9:17 {
+  view: View {
+    defaultEngine: [32m'hbs'[39m,
+    ext: [32m'.hbs'[39m,
+    name: [32m'index'[39m,
+    root: [32m'/Users/veronikaburkova/makeup/dist/views'[39m,
+    engine: [36m[Function: bound middleware][39m,
+    path: [90mundefined[39m
+  }
+}

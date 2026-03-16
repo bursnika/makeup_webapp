@@ -1,0 +1,88 @@
+{{> header}}
+<section class="page-header">
+    <div class="container">
+        <h1>Ваш Кошик</h1>
+        <p>Перевірте обрані товари перед оформленням замовлення</p>
+    </div>
+</section>
+
+<section class="cart-section" style="padding: 4rem 0;">
+    <div class="container">
+        {{#if error}}
+        <div class="alert alert-danger"
+            style="background-color: #f8d7da; color: #721c24; padding: 15px; border-radius: 8px; margin-bottom: 2rem;">
+            {{error}}
+        </div>
+        <a href="/auth/login" class="btn btn-primary">Авторизуватись</a>
+        {{else}}
+        {{#if isEmpty}}
+        <div class="empty-cart"
+            style="text-align: center; padding: 3rem 0; background: white; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.05);">
+            <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="#ccc"
+                stroke-width="1" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom: 1rem;">
+                <circle cx="9" cy="21" r="1"></circle>
+                <circle cx="20" cy="21" r="1"></circle>
+                <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+            </svg>
+            <h3>Ваш кошик ще порожній</h3>
+            <p style="color: #666; margin-bottom: 2rem;">Поверніться до каталогу, щоб знайти щось цікаве.</p>
+            <a href="/products" class="btn btn-primary">Перейти до каталогу</a>
+        </div>
+        {{else}}
+        <div class="cart-layout" style="display: grid; grid-template-columns: 2fr 1fr; gap: 2rem; align-items: start;">
+            <div class="cart-items"
+                style="background: white; border-radius: 12px; padding: 2rem; box-shadow: 0 4px 6px rgba(0,0,0,0.05);">
+                {{#each items}}
+                <div class="cart-item"
+                    style="display: flex; align-items: center; justify-content: space-between; padding-bottom: 1.5rem; margin-bottom: 1.5rem; border-bottom: 1px solid #eee;">
+                    <div class="item-info" style="display: flex; align-items: center; gap: 1.5rem;">
+                        <img src="{{#if this.product.imageUrl}}{{this.product.imageUrl}}{{else}}https://images.unsplash.com/photo-1596462502278-27bfdb403348?auto=format&fit=crop&q=80&w=150{{/if}}"
+                            alt="{{this.product.name}}"
+                            style="width: 80px; height: 80px; object-fit: cover; border-radius: 8px;">
+                        <div>
+                            <h4 style="margin: 0 0 0.5rem 0;">{{this.product.name}}</h4>
+                            <p style="margin: 0; color: #666; font-size: 0.9rem;">Ціна: {{this.product.price}} ₴</p>
+                        </div>
+                    </div>
+                    <div class="item-actions" style="display: flex; align-items: center; gap: 2rem;">
+                        <div class="quantity" style="display: flex; align-items: center; gap: 0.5rem;">
+                            <span style="font-weight: 500;">К-ть: {{this.quantity}}</span>
+                        </div>
+                        <div class="item-total" style="font-weight: 600; font-size: 1.1rem; color: #ff69b4;">
+                            {{this.itemTotal}} ₴
+                        </div>
+                    </div>
+                </div>
+                {{/each}}
+            </div>
+
+            <div class="cart-summary"
+                style="background: white; border-radius: 12px; padding: 2rem; box-shadow: 0 4px 6px rgba(0,0,0,0.05); position: sticky; top: 2rem;">
+                <h3 style="margin-top: 0; margin-bottom: 1.5rem; border-bottom: 1px solid #eee; padding-bottom: 1rem;">
+                    Підсумок замовлення</h3>
+
+                <div style="display: flex; justify-content: space-between; margin-bottom: 1rem;">
+                    <span>Товари ({{items.length}}):</span>
+                    <span>{{total}} ₴</span>
+                </div>
+                <div style="display: flex; justify-content: space-between; margin-bottom: 1.5rem; color: #666;">
+                    <span>Доставка:</span>
+                    <span>За тарифами перевізника</span>
+                </div>
+
+                <div
+                    style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid #eee; padding-top: 1.5rem; margin-bottom: 2rem;">
+                    <span style="font-size: 1.2rem; font-weight: 600;">Разом:</span>
+                    <span style="font-size: 1.5rem; font-weight: 700; color: #ff69b4;">{{total}} ₴</span>
+                </div>
+
+                <a href="#" class="btn btn-primary" style="display: block; width: 100%; text-align: center;">Оформити
+                    замовлення</a>
+            </div>
+        </div>
+        {{/if}}
+        {{/if}}
+    </div>
+</section>
+
+{{> footer}}

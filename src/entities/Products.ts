@@ -41,6 +41,9 @@ export class Products {
   })
   stockQuantity: number | null;
 
+  @Column("character varying", { name: "image_url", nullable: true, length: 255 })
+  imageUrl: string | null;
+
   @OneToMany(() => CartItem, (cartItem) => cartItem.idProduct)
   cartItems: CartItem[];
 

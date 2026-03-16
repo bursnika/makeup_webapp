@@ -8,5 +8,84 @@
     </div>
 </section>
 
+<section class="categories-chart-section" style="padding: 4rem 0; background-color: #fcfcfc;">
+    <div class="container">
+        <h2 style="text-align: center; margin-bottom: 2rem;">Наші Категорії</h2>
+        <div style="max-width: 500px; margin: 0 auto;">
+            <canvas id="categoriesChart"></canvas>
+        </div>
+    </div>
+</section>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const rawChartData = '{{{chartData}}}';
+
+        if (rawChartData) {
+            const chartData = JSON.parse(rawChartData);
+
+            const ctx = document.getElementById('categoriesChart').getContext('2d');
+
+            const gradient = ctx.createLinearGradient(0, 0, 400, 0);
+            gradient.addColorStop(0, 'rgba(255, 105, 180, 0.6)');
+            gradient.addColorStop(1, 'rgba(255, 182, 193, 0.9)');
+
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: chartData.labels,
+                    datasets: [{
+                        label: 'Кількість товарів',
+                        data: chartData.data,
+                        backgroundColor: gradient,
+                        borderColor: 'rgba(255, 105, 180, 1)',
+                        borderWidth: 1,
+                        borderRadius: 8,
+                        barPercentage: 0.6
+                    }]
+                },
+                options: {
+                    indexAxis: 'y',
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        tooltip: {
+                            backgroundColor: 'rgba(255, 255, 255, 0.9)',
+                            titleColor: '#333',
+                            bodyColor: '#666',
+                            borderColor: '#eee',
+                            borderWidth: 1,
+                            padding: 10
+                        }
+                    },
+                    scales: {
+                        x: {
+                            grid: {
+                                display: false
+                            },
+                            ticks: {
+                                precision: 0
+                            }
+                        },
+                        y: {
+                            grid: {
+                                color: 'rgba(0, 0, 0, 0.05)'
+                            },
+                            ticks: {
+                                font: {
+                                    weight: 'bold'
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+    });
+</script>
 
 {{> footer}}
